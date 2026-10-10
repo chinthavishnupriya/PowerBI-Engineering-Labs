@@ -5,6 +5,11 @@
 ## Objective
 Build an interactive Power BI report combining sales order data and monthly forecast data.
 
+## Source files
+- `Sales_Orders.csv` — sales order data
+- `MonthlyForecast.csv` — monthly forecast data
+- `Retail_CRM_and_Products.xlsx` — customer and product reference data
+
 ## Work completed
 - Prepared the monthly forecast data using Power Query.
 - Created relationships between sales orders, customers, products, forecasts, and the date table.
@@ -13,7 +18,7 @@ Build an interactive Power BI report combining sales order data and monthly fore
 - Added a date slicer for interactive filtering.
 
 ## Main file
-The completed Power BI report is currently available at the repository root as `PowerBI_Engineering_Lab_Exercise1.pbix`.
+`PowerBI_Engineering_Lab_Exercise1.pbix`
 
 ## Tools and skills
 - Microsoft Power BI Desktop
@@ -22,4 +27,4 @@ The completed Power BI report is currently available at the repository root as `
 - Report visuals and slicers
 
 ## How to open
-Open the `.pbix` file in Microsoft Power BI Desktop and use the date slicer to explore the report.
+Open the PBIX file in Microsoft Power BI Desktop and use the date slicer to explore the report.
