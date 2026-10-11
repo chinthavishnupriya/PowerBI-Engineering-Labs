@@ -1,0 +1,32 @@
+/*
+Exercise 5 — Illustrative RLS patterns.
+Adapt table/column names and validate relationships in the actual model.
+Do not use this file as proof that RLS is configured.
+*/
+
+/*
+Pattern A: filter a territory dimension using a security mapping table.
+Assumed mapping columns:
+UserAccess[UserEmail]
+UserAccess[PermittedCountry]
+Assumed dimension column:
+DimTerritory[SalesTerritoryCountry]
+*/
+DimTerritory[SalesTerritoryCountry] =
+    LOOKUPVALUE(
+        UserAccess[PermittedCountry],
+        UserAccess[UserEmail], USERPRINCIPALNAME(),
+        UserAccess[PermittedCountry], DimTerritory[SalesTerritoryCountry]
+    )
+
+/*
+Review notes:
+- In Power BI Desktop, create a role and enter the filter expression
+  in the role editor; do not paste this as a normal measure.
+- Confirm the security mapping has one intended country per user, or
+  choose a pattern that supports multiple permitted countries.
+- Test the role with View as and then test Service access with suitable
+  test accounts.
+- A production design must consider relationship propagation, identity
+  format, missing mappings, and least-privilege behavior.
+*/
