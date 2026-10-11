@@ -27,7 +27,6 @@ Integrate batch machine-learning scoring outputs with the Power BI model, publis
 
 ## Supporting files
 
-- Capstone-Implementation-Checklist.md — detailed implementation reference.
 - RLS-Examples.dax — illustrative filter pattern to adapt to the actual security table and relationships.
 
 ## Security note
