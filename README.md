@@ -1,35 +1,20 @@
 # Power BI Engineering Labs
 
-A practical collection of Power BI lab exercises focused on data ingestion, Power Query transformation, dimensional modeling, DAX, and interactive reporting.
+A hands-on portfolio for the **Power BI Engineering Lab Series**: Power Query ETL, dimensional modeling, advanced DAX, executive report UX, and governed deployment.
 
-## Exercises
+## Exercise index
 
-| Exercise | Topic | Status | Folder |
+| Exercise | Focus | Repository status | Main folder |
 |---|---|---|---|
-| Exercise 1 | Sales and Monthly Forecast Dashboard / Power Query ETL | Completed | [Exercise-01](./Exercise-01/) |
-| Exercise 2 | Dimensional Data Modeling — Star Schema & Relationships | Completed in Power BI; documentation updated; final project files still need uploading | [Exercise-02](./Exercise-02/) |
-| Exercise 3 | Advanced DAX Engine | Next | Not started |
+| 1 | Multi-source ingestion and Power Query ETL | PBIX and sample source files present | [Exercise-01](./Exercise-01/) |
+| 2 | AdventureWorks dimensional modeling and relationships | PBIX and documentation present | [Exercise-02](./Exercise-02/) |
+| 3 | Advanced DAX measures and time intelligence | PBIX present; DAX reference documented | [Exercise-03](./Exercise-03/) |
+| 4 | Executive visual analytics and report UX | Blueprint and theme reference; report work remains | [Exercise-04](./Exercise-04/) |
+| 5 | Capstone pipeline, deployment, refresh, and security | Planning and implementation checklist; deployment remains | [Exercise-05](./Exercise-05/) |
 
-## Exercise 2 summary
+**Status convention:** “Present” means a file is in the repository. It does not independently verify every visual, formula, refresh, or service configuration inside the PBIX. Planned or optional evidence is marked separately.
 
-Exercise 2 models Adventure Works Internet Sales in Power BI using a fact table and descriptive dimensions.
-
-**Main tasks completed**
-- Loaded the relevant Adventure Works tables into Power BI Desktop.
-- Inspected the model and reviewed relationships in Manage relationships.
-- Reviewed one-to-many (*:1) cardinality and single-direction cross-filtering.
-- Identified active and inactive date relationships for order, due, and ship dates.
-- Created a column chart showing sum of sales amount by month-year.
-
-**Main tables**
-- `FactInternetSales` — transaction-level sales and numeric measures.
-- `DimCustomer` — customer attributes.
-- `DimProduct`, `DimProductSubcategory`, and `DimProductCategory` — product hierarchy.
-- `DimDate` and `DimDate_Calendar` — date and calendar attributes used by the model/report.
-
-See the [Exercise 2 README](./Exercise-02/README.md) for the objective, model design, validation checklist, and remaining uploads. The [DAX reference](./Exercise-02/DAX-Reference.md) documents the calendar-table pattern and inactive date relationship concept for Exercise 3.
-
-## Repository structure
+## Repository layout
 
 ```text
 PowerBI-Engineering-Labs/
@@ -39,19 +24,40 @@ PowerBI-Engineering-Labs/
 │   ├── PowerBI_Engineering_Lab_Exercise1.pbix
 │   ├── Sales_Orders.csv
 │   ├── MonthlyForecast.csv
-│   └── Retail_CRM_and_Products.xlsx
-└── Exercise-02/
+│   ├── Retail_CRM_and_Products.xlsx
+│   └── PowerQuery-M-Reference.md
+├── Exercise-02/
+│   ├── README.md
+│   ├── AdventureWorks_Exercise2.pbix
+│   ├── DAX-Reference.md
+│   └── Model-Validation-Checklist.md
+├── Exercise-03/
+│   ├── README.md
+│   ├── AdventureWorks_Exercise3.pbix
+│   └── DAX-Measure-Library.md
+├── Exercise-04/
+│   ├── README.md
+│   ├── Executive-Report-Blueprint.md
+│   └── PowerBI-Theme.json
+└── Exercise-05/
     ├── README.md
-    ├── DAX-Reference.md
-    ├── AdventureWorks_Exercise2.pbix   (upload required)
-    └── screenshots/                    (optional; upload required)
+    ├── Capstone-Implementation-Checklist.md
+    └── RLS-Examples.dax
 ```
 
-## Tools
+## How to use this repository
 
-- Microsoft Power BI Desktop
-- Power Query
-- SQL Server and SQL Server Management Studio (SSMS)
-- Dimensional modeling and relationships
+1. Open the relevant `.pbix` file with Power BI Desktop.
+2. Read that exercise's README before changing the model or report.
+3. Treat the `.md`, `.dax`, and `.json` files as references/templates; adapt names and paths to the actual model.
+4. Keep screenshots or evidence in the matching exercise folder when available.
+5. Do not commit credentials, access tokens, private customer data, or gateway secrets.
+
+## Technology
+
+- Power BI Desktop and Power Query M
+- SQL Server / SSMS and AdventureWorks DW
+- Dimensional modeling and relationship design
 - DAX measures and time intelligence
-- Interactive report visuals
+- Interactive report design, drill-through, and tooltips
+- Power BI Service concepts: refresh, gateway, app deployment, and row-level security
