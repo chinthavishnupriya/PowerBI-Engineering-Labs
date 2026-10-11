@@ -1,215 +1,95 @@
-# Exercise 3 — Advanced DAX Engine
+# Exercise 3 — Calculated Fields & Advanced DAX Measures
 
 **Project:** AdventureWorks Data Analysis  
-**Status:** Report and DAX measures created in Power BI Desktop; PBIX and measure reference are in this folder.  
-**Main file:** `AdventureWorks_Exercise3.pbix`
+**Main report:** `AdventureWorks_Exercise3.pbix`  
+**Reference:** `DAX-Measure-Library.md`
 
 ## 1. Objective
 
-Build a reusable DAX measure layer for AdventureWorks Internet Sales. This exercise moves beyond basic visuals by calculating business metrics, profitability, customer ranking, and time-based sales performance. Measures are organized in a dedicated `_Measures` table so calculations can be reused across report visuals.
+Create a centralized DAX measure repository, avoid unnecessary calculated-column growth in the fact table, and calculate context-aware sales, cost, margin, customer ranking, and time-intelligence metrics. The lab guide's key acceptance criteria are **10+ explicit DAX measures validated**, a dedicated `_Measures` table, and no calculated columns added to the fact table for these measures.
 
-The exercise follows the supplied Power BI Engineering Hands-on Lab Guide, Exercise 3: **Calculated Fields & Advanced DAX Measures**.
+## 2. Model and date table
 
-## 2. Dataset and model
+The report uses `FactInternetSales`, customer attributes from `DimCustomer`, and date fields from `DimDate` / `DimDate_Calendar`. The saved model includes a dedicated `_Measures` table.
 
-The report uses the AdventureWorks Data Warehouse sales model. The main fact table is:
+The screenshots supplied during the exercise show `DimDate_Calendar` with a `Date` column and the **Mark as a date table** dialog enabled with `Date` selected. The actual relationship endpoints must still be checked in the PBIX before formulas are treated as validated.
 
-- `FactInternetSales` — sales transactions, sales amount, product cost, customer/product keys, and order/ship date keys.
+## 3. Measure inventory
 
-The model also uses dimension tables such as:
+The Fields pane showed these 11 measure names in `_Measures`:
 
-- `DimCustomer` — customer attributes used for customer analysis.
-- `DimDate` or `DimDate_Calendar` — date attributes used for time-intelligence calculations.
+| # | Measure | Purpose |
+|---:|---|---|
+| 1 | `Total Revenue` | Sales amount aggregation |
+| 2 | `Total Cost` | Product cost aggregation |
+| 3 | `Gross Margin` | Revenue less cost |
+| 4 | `Gross Margin %` | Margin divided by revenue |
+| 5 | `Total Orders` | Order-count KPI |
+| 6 | `Customer Rank` | Rank customers by revenue |
+| 7 | `Revenue YTD` | Year-to-date revenue |
+| 8 | `Revenue Previous Year` | Comparable prior-year revenue |
+| 9 | `Revenue YoY Growth %` | Year-over-year growth percentage |
+| 10 | `Rolling 12M Sales` | Moving 12-month revenue |
+| 11 | `Sales by Ship Date` | Revenue using the ship-date relationship |
 
-Check the exact table and column names in the PBIX before copying formulas: names can differ depending on the imported schema and calendar table used.
+**Inventory result:** 11 measure names are visible, meeting the guide's numeric target of 10+. This inventory check alone does not prove every formula is valid or that no calculated columns were added to `FactInternetSales`.
 
-## 3. DAX concepts practiced
+## 4. DAX techniques
 
-| Concept / function | Purpose in this exercise |
+- `SUM` for base sales and cost aggregation.
+- `DIVIDE` rather than direct division for safe ratios.
+- `CALCULATE` to change filter context.
+- `TOTALYTD` for cumulative year-to-date revenue.
+- `SAMEPERIODLASTYEAR` for prior-year comparison.
+- `DATESINPERIOD` for rolling 12-month analysis.
+- `USERELATIONSHIP` to activate an inactive ship-date relationship for a calculation.
+- `RANKX` for customer ranking.
+
+See [DAX-Measure-Library.md](./DAX-Measure-Library.md) for representative formulas. Adjust table/column names to the exact model.
+
+## 5. Report elements visible in the supplied screenshots
+
+- KPI cards for Total Revenue, Total Cost, Total Orders, Gross Margin, Gross Margin %, and Revenue YoY Growth %.
+- Sales-by-ship-date trend.
+- Customer rank horizontal bar chart.
+- Rolling 12M Sales visual/card.
+
+The screenshots also showed the Rolling 12M Sales measure initially had a warning while its formula referenced a missing `DimDate[Date]` column. The formula was subsequently changed to use `DimDate_Calendar[Date]`, and the visual later displayed a value. Reopen the PBIX and check the formula/refresh state before considering the warning permanently resolved.
+
+## 6. Formatting
+
+| Measure type | Suggested format |
 |---|---|
-| `SUM` | Aggregate sales and product cost |
-| Measure references | Reuse base measures in other calculations |
-| `DIVIDE` | Calculate ratios safely, including a fallback for a zero denominator |
-| `CALCULATE` | Evaluate a measure under a modified filter context |
-| `TOTALYTD` | Calculate year-to-date revenue |
-| `SAMEPERIODLASTYEAR` | Compare the selected period with the equivalent prior-year period |
-| `DATESINPERIOD` | Define a rolling 12-month date window |
-| `USERELATIONSHIP` | Use an inactive relationship for ship-date analysis |
-| `RANKX` | Rank customers by revenue |
-
-## 4. Measure library
-
-The `_Measures` table in the report contains the following measure names:
-
-| Measure | Business meaning |
-|---|---|
-| `Total Revenue` | Sum of sales amount |
-| `Total Cost` | Sum of total product cost |
-| `Gross Margin` | Revenue minus product cost |
-| `Gross Margin %` | Gross margin as a share of revenue |
-| `Total Orders` | Order-count KPI |
-| `Customer Rank` | Customer ranking by revenue |
-| `Revenue YTD` | Revenue accumulated from the start of the year through the selected date |
-| `Revenue Previous Year` | Revenue for the comparable prior-year period |
-| `Revenue YoY Growth %` | Percentage change compared with the prior-year period |
-| `Rolling 12M Sales` | Revenue over a moving 12-month window |
-| `Sales by Ship Date` | Revenue analyzed using the ship-date relationship |
-
-### Representative DAX patterns
-
-These formulas are reference patterns from the lab concepts. Confirm the exact columns and relationship endpoints in the saved PBIX before treating each formula as independently validated.
-
-**Total Revenue**
-```dax
-Total Revenue =
-SUM ( FactInternetSales[SalesAmount] )
-```
-
-**Total Cost**
-```dax
-Total Cost =
-SUM ( FactInternetSales[TotalProductCost] )
-```
-
-**Gross Margin**
-```dax
-Gross Margin =
-[Total Revenue] - [Total Cost]
-```
-
-**Gross Margin %**
-```dax
-Gross Margin % =
-DIVIDE ( [Gross Margin], [Total Revenue], 0 )
-```
-
-**Revenue YTD**
-```dax
-Revenue YTD =
-TOTALYTD (
-    [Total Revenue],
-    DimDate_Calendar[Date]
-)
-```
-
-**Revenue Previous Year**
-```dax
-Revenue Previous Year =
-CALCULATE (
-    [Total Revenue],
-    SAMEPERIODLASTYEAR ( DimDate_Calendar[Date] )
-)
-```
-
-**Revenue YoY Growth %**
-```dax
-Revenue YoY Growth % =
-DIVIDE (
-    [Total Revenue] - [Revenue Previous Year],
-    [Revenue Previous Year],
-    0
-)
-```
-
-**Rolling 12M Sales**
-```dax
-Rolling 12M Sales =
-CALCULATE (
-    [Total Revenue],
-    DATESINPERIOD (
-        DimDate_Calendar[Date],
-        MAX ( DimDate_Calendar[Date] ),
-        -12,
-        MONTH
-    )
-)
-```
-
-**Customer Rank**
-```dax
-Customer Rank =
-RANKX (
-    ALL ( DimCustomer ),
-    [Total Revenue],
-    ,
-    DESC,
-    DENSE
-)
-```
-
-**Sales by Ship Date**
-
-The guide uses `USERELATIONSHIP` to activate the inactive ship-date relationship for this calculation. Use the same two columns that form the inactive relationship in the actual model.
-
-```dax
-Sales by Ship Date =
-CALCULATE (
-    [Total Revenue],
-    USERELATIONSHIP (
-        FactInternetSales[ShipDateKey],
-        DimDate[DateKey]
-    )
-)
-```
-
-For all formulas, adapt the calendar table and key columns to the relationship endpoints in the PBIX. See [DAX-Measure-Library.md](./DAX-Measure-Library.md) for the longer reference and validation notes.
-
-## 5. Report visuals and KPIs
-
-The saved report includes the following elements:
-
-- **KPI cards:** Gross Margin %, Revenue YoY Growth %, Total Cost, Total Orders, and Gross Margin.
-- **Sales by Ship Date:** a line chart showing sales over time using the ship-date measure.
-- **Rolling 12M Sales:** a visual for the rolling 12-month sales measure.
-- **Customer Rank and Customer Rank by FirstName:** a horizontal bar chart ranking customers.
-- **Sales by Ship Date / MonthYear:** a time-based trend visual.
-
-The layout combines headline business indicators with trend and customer-level analysis. Use the date axis and available report filters to inspect how measures respond to context.
-
-## 6. Formatting recommendations
-
-| Measure type | Recommended format |
-|---|---|
-| Revenue, cost, gross margin, YTD, previous-year sales, rolling sales | Currency |
+| Revenue, cost, margin, YTD, prior-year sales, rolling sales, ship-date sales | Currency |
 | Gross Margin %, Revenue YoY Growth % | Percentage |
 | Total Orders, Customer Rank | Whole number |
 
-Apply formats to the measures themselves where possible, rather than relying only on visual-level formatting. Keep percentage decimal places consistent across KPI cards.
+The lab guide illustrates currency, percentage, and integer formats. Keep units and decimal places consistent across KPI cards.
 
-## 7. Validation checklist
+## 7. Acceptance and remaining verification
 
-### Completed / present in repository
-- [x] `AdventureWorks_Exercise3.pbix` is present.
-- [x] A dedicated `_Measures` table is visible in the model.
-- [x] The measure names listed above are present in the model.
-- [x] KPI and analytical visuals are present in the report.
+### Confirmed from repository/screenshots
+- [x] Exercise 3 PBIX exists in the repository.
+- [x] A dedicated `_Measures` table is visible in the Fields pane.
+- [x] 11 measure names are visible in the Fields pane.
+- [x] KPI and analytical visuals are visible in the report screenshot.
+- [x] The date-table dialog showed `DimDate_Calendar` marked as a date table with `Date` selected.
+- [x] Rolling 12M Sales later displayed a value after the date column reference was changed.
 
-### Recommended final verification
-- [ ] Open the PBIX from a fresh repository download and check for missing-source errors.
-- [ ] Verify each DAX expression against the actual table and column names.
-- [ ] Mark the intended calendar table as a Date table and confirm its date range covers the sales data.
-- [ ] Test YTD and prior-year calculations across more than one year.
-- [ ] Test Rolling 12M Sales with a date filter and confirm the expected rolling window.
-- [ ] Test Sales by Ship Date and verify that the intended inactive relationship is used.
-- [ ] Check customer rank under slicers and confirm the intended ranking scope.
-- [ ] Confirm currency, percentage, and whole-number formatting.
-- [ ] Capture screenshots of the measure list, report page, and relevant relationship settings.
+### Still needs an explicit final check
+- [ ] Reopen the saved PBIX and ensure no measure warning/error icon remains.
+- [ ] Validate all 11 measure formulas against the exact column names and business definitions.
+- [ ] Confirm YTD and prior-year calculations across multiple years.
+- [ ] Confirm Rolling 12M Sales changes correctly with a date filter.
+- [ ] Confirm `Sales by Ship Date` uses the actual inactive relationship endpoints.
+- [ ] Verify the intended currency, percentage, and whole-number formats.
+- [ ] Inspect `FactInternetSales` and confirm no calculated columns were added for these metrics.
+- [ ] Capture final screenshots of the measure list, DAX formula results, and report page.
 
-A measure appearing in the Fields pane confirms that it exists in the model; it does not, by itself, prove that the calculation is correct for every filter context.
+A measure name appearing in the Fields pane confirms its presence, not formula correctness. Do not mark the final validation items complete until checked in Power BI Desktop.
 
-## 8. Files in this folder
+## 8. Files
 
-- `AdventureWorks_Exercise3.pbix` — Power BI report and model.
-- `DAX-Measure-Library.md` — reference formulas, explanations, formatting, and validation checks.
-- `README.md` — exercise overview, concepts, report contents, and verification checklist.
-
-## 9. Skills demonstrated
-
-- DAX measure authoring and measure reuse
-- Revenue and cost aggregation
-- Profitability and percentage calculations
-- Time intelligence and year-over-year comparisons
-- Rolling-window analysis
-- Inactive relationship activation using `USERELATIONSHIP`
-- Customer ranking with `RANKX`
-- KPI cards and analytical Power BI visuals
+- `AdventureWorks_Exercise3.pbix` — report/model.
+- `DAX-Measure-Library.md` — DAX patterns, explanations, and format guidance.
+- `README.md` — objective, measure inventory, evidence, and acceptance checklist.
