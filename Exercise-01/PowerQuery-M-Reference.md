@@ -31,7 +31,7 @@ If `FilePath` already includes the filename, remove the appended filename from t
 
 ## 2. SQL product/sales source and folding audit
 
-The lab guide's sample uses AdventureWorksDW2020. Use the database installed in your own environment; do not assume the sample database name matches your SQL Server instance.
+The lab guide's sample uses AdventureWorksDW2020. Your setup previously used an AdventureWorksDW2022 backup, so change the database name to the actual restored database name in your environment. Do not assume the sample database name matches your SQL Server instance.
 
 ```powerquery
 let
@@ -53,7 +53,25 @@ in
     TypedColumns
 ```
 
-This is an illustrative SQL transformation pattern; adjust the database/table and filter for the actual product catalog query and schema. The lab guide specifically requires filtering active product SKUs and coercing currency on the SQL product source.
+This is an illustrative SQL transformation pattern for demonstrating parameterization and folding; it is not the required product-catalog query by itself. The lab guide specifically requires a SQL product source that filters active SKUs and coerces currency. For the product catalog, adapt the table and active-status column to the real schema, for example:
+
+```powerquery
+let
+    Source = Sql.Database(ServerName, "AdventureWorksDW2022"),
+    Products = Source{[Schema = "dbo", Item = "DimProduct"]}[Data],
+    ActiveProducts = Table.SelectRows(
+        Products,
+        each [IsActive] = true
+    ),
+    TypedProducts = Table.TransformColumnTypes(
+        ActiveProducts,
+        {{"ListPrice", Currency.Type}}
+    )
+in
+    TypedProducts
+```
+
+The `IsActive` and `ListPrice` names above are placeholders, not verified AdventureWorks column names. Replace the status condition and currency column with the actual product schema. If the restored database is named differently, change the database name too.
 
 **Query-folding audit:** in Power Query, right-click the relevant SQL query step and check **View Native Query**. Check the steps where folding is expected. If the menu is disabled, investigate the connector/step sequence; do not claim 100% folding from this sample alone.
 
