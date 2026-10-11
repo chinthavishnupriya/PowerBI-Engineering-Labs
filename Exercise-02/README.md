@@ -6,60 +6,66 @@
 
 ## Objective
 
-Build and validate a dimensional model for AdventureWorks sales. Separate transaction-level metrics from descriptive attributes and use clear relationship paths for analysis.
+Build a Kimball-style dimensional model for AdventureWorks sales. Separate transaction-level measures from descriptive attributes, create a dedicated calendar, and establish clear relationship paths—including an inactive ship-date relationship for role-playing date analysis.
 
 ## Work recorded
 
-- Loaded the relevant AdventureWorks tables into Power BI.
-- Inspected the model and relationship settings.
-- Reviewed fact/dimension roles, one-to-many cardinality, and single-direction filtering.
-- Reviewed active and inactive date relationships for order, due, and ship dates.
-- Created a column chart for sales amount by month-year.
+- Loaded and inspected the AdventureWorks tables in Power BI.
+- Reviewed fact/dimension roles and relationship settings.
+- Reviewed one-to-many cardinality and single-direction filtering.
+- Reviewed active/inactive date relationships for order, due, and ship dates.
+- Created a sales amount by month-year column chart.
+- Created a separate `DimDate_Calendar` table in the Exercise 2 PBIX and selected its `Date` column in the **Mark as date table** dialog.
 
 ## Model inventory
 
-| Table | Role | Typical use |
+| Table | Role | Review focus |
 |---|---|---|
-| `FactInternetSales` | Fact | Transaction amounts and foreign keys |
-| `DimCustomer` | Dimension | Customer attributes |
-| `DimProduct` | Dimension | Product attributes |
-| `DimProductSubcategory` | Dimension | Product subcategory hierarchy |
-| `DimProductCategory` | Dimension | Product category hierarchy |
-| `DimDate` | Date dimension | Warehouse date attributes |
-| `DimDate_Calendar` | Reporting calendar | Date, year, quarter, month and month-year labels |
+| `FactInternetSales` | Fact | Sales amounts, product cost, customer/product/date keys |
+| `DimCustomer` | Dimension | Customer attributes and customer key |
+| `DimProduct` | Dimension | Product attributes and product key |
+| `DimProductSubcategory` | Dimension | Subcategory hierarchy |
+| `DimProductCategory` | Dimension | Category hierarchy |
+| `DimDate` | Warehouse date dimension | Existing AdventureWorks date attributes and keys |
+| `DimDate_Calendar` | Reporting calendar | Date, year, quarter, month, and month-year labels |
 
-The actual loaded table/column names depend on the selected backup and model. Check the Fields pane before copying any example DAX.
+Exact relationship endpoints and field names must be checked in the saved model; the inventory above is not a substitute for inspecting Model view.
 
-## Relationship design
+## Required relationship design
 
-- Use a star-schema pattern wherever possible: dimensions filter the fact table.
-- Prefer one-to-many dimension-to-fact relationships with **Single** cross-filter direction.
-- Use the order-date path as the active reporting relationship when appropriate.
-- Keep alternate date roles (such as ship date) inactive if activating them would create competing filter paths.
-- Use `USERELATIONSHIP` inside a measure when a calculation needs an inactive date path.
-- Sort text month-year labels by a chronological numeric/date key.
+- Use dimensions to filter the fact table wherever practical.
+- Standard dimension-to-fact paths should normally be **1:*** and **Single** direction.
+- Use the order-date relationship as the active date path for the primary sales analysis.
+- Keep ship-date relationship inactive when activating it would create competing paths.
+- Use `USERELATIONSHIP` in a measure when analysis must use the inactive ship-date path.
+- Ensure the date table has a unique date column, covers the required fact-date range, and is marked as a Date table.
+- Sort `MonthYear` by a chronological key (for example, a numeric year-month key), not alphabetically.
 
 ## Report visual recorded
 
 - **X-axis:** `DimDate_Calendar[MonthYear]`
 - **Y-axis:** Sum of `FactInternetSales[SalesAmount]`
 
-Verify the sort-by column and ensure the date table covers the fact table's date range.
+Verify that the month-year labels sort chronologically and that slicers filter the visual as expected.
 
-## Validation checklist
+## Acceptance checklist
 
 - [x] PBIX file is present in the repository.
 - [x] Fact and dimension tables were inspected.
-- [x] Relationships were reviewed in Manage relationships.
+- [x] Relationship settings were reviewed in Power BI Desktop.
 - [x] One-to-many cardinality and single-direction filtering were reviewed.
 - [x] Active/inactive date relationship concepts were reviewed.
 - [x] Sales by month-year visual was created.
-- [ ] Reopen the committed PBIX from a fresh download.
-- [ ] Add screenshots of Model view, Manage relationships, and report visual.
-- [ ] Confirm all relationship endpoints and date sorting against the actual model.
+- [x] A calendar table was created and the Date-table dialog was used.
+- [ ] Verify the calendar date range covers all required fact dates.
+- [ ] Verify all relationship endpoints, cardinalities, and active/inactive states in Model view.
+- [ ] Verify every dimension key is unique and fact foreign keys map as expected.
+- [ ] Verify MonthYear sort-by column and visual totals.
+- [ ] Download/reopen the committed PBIX and confirm no source errors.
+- [ ] Add screenshots of Model view, Manage relationships, and the report visual.
 
 ## Supporting files
 
-- `DAX-Reference.md` — calendar table and inactive-date examples.
-- `Model-Validation-Checklist.md` — practical review checklist.
-- `AdventureWorks_Exercise2.pbix` — report/model file.
+- `DAX-Reference.md` — calendar and inactive-date examples.
+- `Model-Validation-Checklist.md` — practical validation checklist.
+- `AdventureWorks_Exercise2.pbix` — Power BI report/model.
