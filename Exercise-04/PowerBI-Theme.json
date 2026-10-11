@@ -1,0 +1,14 @@
+{
+  "name": "Power BI Engineering Executive",
+  "dataColors": [
+    "#1769AA",
+    "#00A6A6",
+    "#F0A202",
+    "#6C63A8",
+    "#D95D39",
+    "#5B8E7D"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#202124",
+  "tableAccent": "#1769AA"
+}
