@@ -1,77 +1,65 @@
 # Exercise 2 — Dimensional Data Modeling: Star Schema & Relationships
 
+**Main report:** `AdventureWorks_Exercise2.pbix`  
+**Dataset:** AdventureWorks Data Warehouse  
+**Tools:** SQL Server, SSMS, Power BI Desktop
+
 ## Objective
 
-Build and validate a dimensional model for Adventure Works sales data in Power BI. The goal is to separate transaction-level measures from descriptive dimension attributes and configure reliable relationships for reporting.
+Build and validate a dimensional model for AdventureWorks sales. Separate transaction-level metrics from descriptive attributes and use clear relationship paths for analysis.
 
-## Dataset and tools
+## Work recorded
 
-- **Dataset:** Adventure Works Data Warehouse. The lab guide refers to `AdventureWorksDW2020`; this project used the available Adventure Works DW backup.
-- **Fact table:** `FactInternetSales`
-- **Tools:** SQL Server, SQL Server Management Studio (SSMS), and Power BI Desktop.
+- Loaded the relevant AdventureWorks tables into Power BI.
+- Inspected the model and relationship settings.
+- Reviewed fact/dimension roles, one-to-many cardinality, and single-direction filtering.
+- Reviewed active and inactive date relationships for order, due, and ship dates.
+- Created a column chart for sales amount by month-year.
 
-## Work completed
+## Model inventory
 
-- Connected Power BI Desktop to the Adventure Works data source and loaded the required tables.
-- Inspected the model in Model view.
-- Reviewed fact and dimension tables and their key columns.
-- Reviewed one-to-many relationships and single-direction filtering.
-- Identified active and inactive relationships for role-playing dates.
-- Built a column chart showing sales amount by month-year.
-
-## Model tables
-
-| Table | Role | Purpose |
+| Table | Role | Typical use |
 |---|---|---|
-| `FactInternetSales` | Fact | Sales transactions and numeric measures such as `SalesAmount`; contains customer, product, and date keys. |
-| `DimCustomer` | Dimension | Descriptive customer attributes. |
-| `DimProduct` | Dimension | Product attributes linked to sales and product subcategories. |
-| `DimProductSubcategory` | Dimension | Subcategory attributes linking products to categories. |
-| `DimProductCategory` | Dimension | Product category attributes. |
-| `DimDate` | Date dimension | Date attributes from the warehouse. |
-| `DimDate_Calendar` | Reporting calendar | Calendar attributes such as year, quarter, month, and month-year used for reporting. |
+| `FactInternetSales` | Fact | Transaction amounts and foreign keys |
+| `DimCustomer` | Dimension | Customer attributes |
+| `DimProduct` | Dimension | Product attributes |
+| `DimProductSubcategory` | Dimension | Product subcategory hierarchy |
+| `DimProductCategory` | Dimension | Product category hierarchy |
+| `DimDate` | Date dimension | Warehouse date attributes |
+| `DimDate_Calendar` | Reporting calendar | Date, year, quarter, month and month-year labels |
 
-The exact set of loaded tables depends on the source backup and the tables selected in Power BI.
+The actual loaded table/column names depend on the selected backup and model. Check the Fields pane before copying any example DAX.
 
 ## Relationship design
 
-The intended pattern is a **star schema**: the sales fact table connects to descriptive dimensions using keys. Product subcategory and category form a hierarchy.
+- Use a star-schema pattern wherever possible: dimensions filter the fact table.
+- Prefer one-to-many dimension-to-fact relationships with **Single** cross-filter direction.
+- Use the order-date path as the active reporting relationship when appropriate.
+- Keep alternate date roles (such as ship date) inactive if activating them would create competing filter paths.
+- Use `USERELATIONSHIP` inside a measure when a calculation needs an inactive date path.
+- Sort text month-year labels by a chronological numeric/date key.
 
-- Use **many-to-one (*:1)** from sales rows to the matching dimension key (equivalent to one-to-many from dimension to fact).
-- Keep cross-filter direction **Single** unless the lab requirement explicitly needs otherwise.
-- Keep the order-date relationship used for the main report active.
-- Keep alternate role-playing date relationships, such as ship date, inactive when activating them would create ambiguous filtering paths.
-- Use a date/calendar table for consistent time-based analysis.
-
-### Role-playing dates
-
-The model contains date-key relationships for order, due, and ship dates. Only one suitable relationship should be active when multiple date roles could create ambiguous filtering. An inactive relationship can be activated inside a DAX measure with `USERELATIONSHIP` when needed; this is relevant to Exercise 3.
-
-## Report visual
-
-A column chart was created with:
+## Report visual recorded
 
 - **X-axis:** `DimDate_Calendar[MonthYear]`
 - **Y-axis:** Sum of `FactInternetSales[SalesAmount]`
 
-This visual shows sales amount by month-year. Verify the sort order of `MonthYear` before interpreting the trend; text month labels should be sorted by a chronological key when needed.
+Verify the sort-by column and ensure the date table covers the fact table's date range.
 
 ## Validation checklist
 
-- [x] Fact and dimension tables are visible in the model.
-- [x] Relationships were reviewed in **Manage relationships**.
-- [x] One-to-many cardinality and single-direction filtering are used for the shown relationships.
-- [x] Active and inactive date relationships are visible in the model.
-- [x] Sales amount by month-year visual has been created.
-- [ ] Upload the final `.pbix` file to this folder.
-- [ ] Add screenshots of Model view, Manage relationships, and the report visual.
-- [ ] Download and reopen the uploaded `.pbix` to confirm it works.
+- [x] PBIX file is present in the repository.
+- [x] Fact and dimension tables were inspected.
+- [x] Relationships were reviewed in Manage relationships.
+- [x] One-to-many cardinality and single-direction filtering were reviewed.
+- [x] Active/inactive date relationship concepts were reviewed.
+- [x] Sales by month-year visual was created.
+- [ ] Reopen the committed PBIX from a fresh download.
+- [ ] Add screenshots of Model view, Manage relationships, and report visual.
+- [ ] Confirm all relationship endpoints and date sorting against the actual model.
 
-## Files for this exercise
+## Supporting files
 
-- `README.md` — objective, model design, work completed, and validation.
-- `AdventureWorks_Exercise2.pbix` — final Power BI Desktop project; upload it from your computer.
-- `screenshots/` — optional evidence images of the model and report.
-- `DAX-Reference.md` — date-table and role-playing date notes.
-
-> **Important:** This documentation update does not upload the PBIX file or screenshots. Those files must be uploaded separately from your computer.
+- `DAX-Reference.md` — calendar table and inactive-date examples.
+- `Model-Validation-Checklist.md` — practical review checklist.
+- `AdventureWorks_Exercise2.pbix` — report/model file.
