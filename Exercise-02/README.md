@@ -42,5 +42,4 @@ The recorded monthly sales visual uses DimDate_Calendar[MonthYear] on the X-axis
 ## Supporting files
 
 - DAX-Reference.md — calendar and inactive-date examples.
-- Model-Validation-Checklist.md — detailed model review reference.
 - AdventureWorks_Exercise2.pbix — Power BI report and model.
