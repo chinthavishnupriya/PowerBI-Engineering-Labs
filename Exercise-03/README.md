@@ -6,58 +6,57 @@
 
 ## Objective
 
-Create centralized DAX measures for sales, cost, margin, customer ranking, and time intelligence. The exercise uses a dedicated _Measures table and context-aware calculations rather than adding calculated columns for these measures to the fact table.
+Create explicit, reusable DAX measures for sales performance, profitability, customer ranking, and time-based comparisons. Measures are organized in a dedicated _Measures table.
 
-## Model and measure inventory
-
-The report uses FactInternetSales, customer attributes from DimCustomer, and date fields from DimDate / DimDate_Calendar. A dedicated _Measures table is present in the model.
+## Measure inventory
 
 The Fields pane showed these 11 measure names:
 
 | Measure | Purpose |
 |---|---|
-| Total Revenue | Sales amount aggregation |
-| Total Cost | Product cost aggregation |
-| Gross Margin | Revenue less cost |
-| Gross Margin % | Margin divided by revenue |
+| Total Revenue | Aggregate sales amount |
+| Total Cost | Aggregate product cost |
+| Gross Margin | Revenue minus cost |
+| Gross Margin % | Margin as a proportion of revenue |
 | Total Orders | Order-count KPI |
 | Customer Rank | Rank customers by revenue |
 | Revenue YTD | Year-to-date revenue |
 | Revenue Previous Year | Comparable prior-year revenue |
-| Revenue YoY Growth % | Year-over-year growth percentage |
-| Rolling 12M Sales | Moving 12-month revenue |
+| Revenue YoY Growth % | Year-over-year revenue change |
+| Rolling 12M Sales | Revenue in a rolling 12-month window |
 | Sales by Ship Date | Revenue using the ship-date relationship |
 
-The supplied screenshots show DimDate_Calendar with a Date column selected in the **Mark as a date table** dialog. The Rolling 12M Sales formula was changed from a reference to DimDate[Date] to DimDate_Calendar[Date]; a later screenshot showed a displayed value. Formula correctness should be judged from the saved PBIX and actual results, not measure names alone.
+The report uses FactInternetSales, customer attributes from DimCustomer, and date fields from DimDate / DimDate_Calendar.
 
-## DAX techniques
+## DAX work and concepts
 
-- SUM for base sales and cost aggregation.
-- DIVIDE for safe ratios.
-- CALCULATE to modify filter context.
-- TOTALYTD for year-to-date revenue.
-- SAMEPERIODLASTYEAR for prior-year comparisons.
-- DATESINPERIOD for rolling 12-month analysis.
-- USERELATIONSHIP to use an inactive ship-date relationship.
-- RANKX for customer ranking.
+The measure set covers SUM for base revenue/cost, measure references for gross margin, DIVIDE for ratios, CALCULATE for filter context, TOTALYTD for year-to-date calculations, SAMEPERIODLASTYEAR for prior-year comparisons, DATESINPERIOD for rolling 12-month analysis, USERELATIONSHIP for ship-date analysis, and RANKX for customer ranking.
 
-See [DAX-Measure-Library.md](./DAX-Measure-Library.md) for representative formulas. Adapt table and column names to the exact model.
+Representative formulas are in DAX-Measure-Library.md. Confirm exact column names and relationship endpoints in the saved model before treating a reference formula as validated.
 
-## Report elements
+## Date table and Rolling 12M Sales
 
-The report screenshots show KPI cards for Total Revenue, Total Cost, Total Orders, Gross Margin, Gross Margin %, and Revenue YoY Growth %, plus a sales-by-ship-date trend, customer-rank horizontal bar chart, and Rolling 12M Sales visual/card.
+The screenshots show DimDate_Calendar with its Date column selected in the Mark as date table dialog. During troubleshooting, the Rolling 12M Sales formula was changed from DimDate[Date] to DimDate_Calendar[Date]. A later screenshot showed a displayed value for the measure. The saved formula and its behavior under date filters should still be checked in the PBIX.
 
-## Number formatting
+## Report visuals
 
-| Measure type | Suggested format |
+The report screenshots show KPI cards for Total Revenue, Total Cost, Total Orders, Gross Margin, Gross Margin %, and Revenue YoY Growth %, plus a customer-ranking horizontal bar chart, a sales-by-ship-date trend, and a Rolling 12M Sales visual/card.
+
+## Formatting
+
+| Measure type | Format |
 |---|---|
-| Revenue, cost, margin, YTD, prior-year sales, rolling sales, ship-date sales | Currency |
+| Revenue, cost, margin, YTD, prior-year, rolling, and ship-date sales | Currency |
 | Gross Margin %, Revenue YoY Growth % | Percentage |
 | Total Orders, Customer Rank | Whole number |
 
-Keep units and decimal places consistent across KPI cards.
+Keep currency symbols, decimal places, and percentage formatting consistent.
 
 ## Files
 
 - AdventureWorks_Exercise3.pbix — report and model.
-- DAX-Measure-Library.md — DAX patterns, explanations, and format guidance.
+- DAX-Measure-Library.md — measure inventory, formulas, and formatting guidance.
+
+## Outcome
+
+Exercise 3 extends the dimensional model with centralized measures and KPI/time-intelligence visuals. The visible measure list documents the work performed; final correctness depends on formula and filter-context testing.
