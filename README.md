@@ -30,6 +30,10 @@ Created a dedicated _Measures table. The Fields pane showed 11 measure names: To
 
 Built Sales Analysis, Executive Overview, Decomposition Tree, Customer 360, and 12M Trend Tooltip pages. The visible report includes KPI cards, sales trends, customer ranking, a CustomerKey table, a date slicer, a revenue decomposition tree using product-category and territory-related fields, a CustomerKey drill-through filter with Keep all filters enabled, and a tooltip page selected in a visual's tooltip settings.
 
+## Verification
+
+See [Portfolio-Verification.md](./Portfolio-Verification.md) for the repository inventory and the remaining checks that must be validated in Power BI Desktop/Service.
+
 ## Repository layout
 
 - Exercise-01/: PBIX, source files, and Power Query reference.
