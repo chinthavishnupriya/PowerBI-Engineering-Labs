@@ -1,107 +1,23 @@
-[
-  {
-    "Duration": 1,
-    "Query": "<Batch xmlns=\"http://schemas.microsoft.com/analysisservices/2003/engine\"/>",
-    "StartTime": "2026-10-12T22:14:33.846667+05:30",
-    "EndTime": "0001-01-01T00:00:00",
-    "Username": "VISHNUPRIYA\\chint",
-    "DatabaseName": "d1119226-a80f-497f-a550-070b7b907ab0",
-    "QueryType": "Xmla",
-    "RequestID": "8D38042A-908C-4A5F-88D7-DC0FD2B45301",
-    "AggregationMatchCount": 0,
-    "AggregationMissCount": 0,
-    "RequestProperties": null,
-    "RequestParameters": null,
-    "ActivityID": "6F7998C7-C66F-4EFE-8D59-B4D01D8E20BE"
-  },
-  {
-    "Duration": 1,
-    "Query": "<Batch xmlns=\"http://schemas.microsoft.com/analysisservices/2003/engine\"/>",
-    "StartTime": "2026-10-12T22:14:33.693333+05:30",
-    "EndTime": "0001-01-01T00:00:00",
-    "Username": "VISHNUPRIYA\\chint",
-    "DatabaseName": "d1119226-a80f-497f-a550-070b7b907ab0",
-    "QueryType": "Xmla",
-    "RequestID": "B782ECDE-CBC0-4320-9134-81684D904CC2",
-    "AggregationMatchCount": 0,
-    "AggregationMissCount": 0,
-    "RequestProperties": null,
-    "RequestParameters": null,
-    "ActivityID": "208F1E44-7847-461F-B541-CFD0F8401306"
-  },
-  {
-    "Duration": 1,
-    "Query": "<Batch xmlns=\"http://schemas.microsoft.com/analysisservices/2003/engine\"/>",
-    "StartTime": "2026-10-12T22:13:53.626667+05:30",
-    "EndTime": "0001-01-01T00:00:00",
-    "Username": "VISHNUPRIYA\\chint",
-    "DatabaseName": "d1119226-a80f-497f-a550-070b7b907ab0",
-    "QueryType": "Xmla",
-    "RequestID": "02B5643B-E30F-4CCD-9FD1-5241886B77C2",
-    "AggregationMatchCount": 0,
-    "AggregationMissCount": 0,
-    "RequestProperties": null,
-    "RequestParameters": null,
-    "ActivityID": "6CAF43A2-CF57-4A1A-9BAB-77CFF3694490"
-  },
-  {
-    "Duration": 1,
-    "Query": "<Batch xmlns=\"http://schemas.microsoft.com/analysisservices/2003/engine\"/>",
-    "StartTime": "2026-10-12T22:13:53.513333+05:30",
-    "EndTime": "0001-01-01T00:00:00",
-    "Username": "VISHNUPRIYA\\chint",
-    "DatabaseName": "d1119226-a80f-497f-a550-070b7b907ab0",
-    "QueryType": "Xmla",
-    "RequestID": "5FB88F3F-E544-4FA0-A5D2-BBA448F35D12",
-    "AggregationMatchCount": 0,
-    "AggregationMissCount": 0,
-    "RequestProperties": null,
-    "RequestParameters": null,
-    "ActivityID": "55643653-6B43-4D3F-BBBE-50314ACF7E53"
-  },
-  {
-    "Duration": 2,
-    "Query": "<Subscribe xmlns=\"http://schemas.microsoft.com/analysisservices/2003/engine\">\n          <Object>\n            <TraceID>DaxStudio_Session_89A63151-18B1-40A0-9B1D-A969B751D312_all</TraceID>\n          </Object>\n          <SubscriptionId xmlns=\"http://schemas.microsoft.com/analysisservices/2018/engine/800\">TRACE_SUBSCRIPTION_a44b9c10-772a-43f5-be64-c3c16cfb2233</SubscriptionId>\n        </Subscribe>",
-    "StartTime": "2026-10-12T22:13:50.116667+05:30",
-    "EndTime": "0001-01-01T00:00:00",
-    "Username": "VISHNUPRIYA\\chint",
-    "DatabaseName": null,
-    "QueryType": "Xmla",
-    "RequestID": "0FA81030-F21B-4CF6-B867-64D279F0AA75",
-    "AggregationMatchCount": 0,
-    "AggregationMissCount": 0,
-    "RequestProperties": null,
-    "RequestParameters": null,
-    "ActivityID": "0FA81030-F21B-4CF6-B867-64D279F0AA75"
-  },
-  {
-    "Duration": 1,
-    "Query": "<Subscribe xmlns=\"http://schemas.microsoft.com/analysisservices/2003/engine\">\n          <Object>\n            <TraceID>DaxStudio_Session_BDEEC3B3-160F-4D22-80FE-3C64E6A604FE_all</TraceID>\n          </Object>\n          <SubscriptionId xmlns=\"http://schemas.microsoft.com/analysisservices/2018/engine/800\">TRACE_SUBSCRIPTION_c0e7ebae-fec6-4516-bdbd-4239286f5345</SubscriptionId>\n        </Subscribe>",
-    "StartTime": "2026-10-12T22:07:00.133333+05:30",
-    "EndTime": "0001-01-01T00:00:00",
-    "Username": "VISHNUPRIYA\\chint",
-    "DatabaseName": "AdventureWorks_Exercise5",
-    "QueryType": "Xmla",
-    "RequestID": "5596B3F5-3901-4DE1-AFC6-81EFF828F11D",
-    "AggregationMatchCount": 0,
-    "AggregationMissCount": 0,
-    "RequestProperties": null,
-    "RequestParameters": null,
-    "ActivityID": "5596B3F5-3901-4DE1-AFC6-81EFF828F11D"
-  },
-  {
-    "Duration": 1,
-    "Query": "<Subscribe xmlns=\"http://schemas.microsoft.com/analysisservices/2003/engine\">\n          <Object>\n            <TraceID>DaxStudio_Session_BDEEC3B3-160F-4D22-80FE-3C64E6A604FE_all</TraceID>\n          </Object>\n          <SubscriptionId xmlns=\"http://schemas.microsoft.com/analysisservices/2018/engine/800\">TRACE_SUBSCRIPTION_3079dc00-cf91-4686-a457-63dffd4e5b2e</SubscriptionId>\n        </Subscribe>",
-    "StartTime": "2026-10-12T22:06:55.766667+05:30",
-    "EndTime": "0001-01-01T00:00:00",
-    "Username": "VISHNUPRIYA\\chint",
-    "DatabaseName": "AdventureWorks_Exercise5",
-    "QueryType": "Xmla",
-    "RequestID": "291B3380-E07E-4208-BE1D-840F6A370C16",
-    "AggregationMatchCount": 0,
-    "AggregationMissCount": 0,
-    "RequestProperties": null,
-    "RequestParameters": null,
-    "ActivityID": "291B3380-E07E-4208-BE1D-840F6A370C16"
-  }
-]
+Duration,Query,StartTime,EndTime,Username,DatabaseName,QueryType,RequestID,AggregationMatchCount,AggregationMissCount,RequestProperties,RequestParameters,ActivityID
+1,"<Batch xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine""/>",2026-10-12T22:14:33.846667+05:30,0001-01-01T00:00:00,VISHNUPRIYA\chint,d1119226-a80f-497f-a550-070b7b907ab0,Xmla,8D38042A-908C-4A5F-88D7-DC0FD2B45301,0,0,,,6F7998C7-C66F-4EFE-8D59-B4D01D8E20BE
+1,"<Batch xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine""/>",2026-10-12T22:14:33.693333+05:30,0001-01-01T00:00:00,VISHNUPRIYA\chint,d1119226-a80f-497f-a550-070b7b907ab0,Xmla,B782ECDE-CBC0-4320-9134-81684D904CC2,0,0,,,208F1E44-7847-461F-B541-CFD0F8401306
+1,"<Batch xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine""/>",2026-10-12T22:13:53.626667+05:30,0001-01-01T00:00:00,VISHNUPRIYA\chint,d1119226-a80f-497f-a550-070b7b907ab0,Xmla,02B5643B-E30F-4CCD-9FD1-5241886B77C2,0,0,,,6CAF43A2-CF57-4A1A-9BAB-77CFF3694490
+1,"<Batch xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine""/>",2026-10-12T22:13:53.513333+05:30,0001-01-01T00:00:00,VISHNUPRIYA\chint,d1119226-a80f-497f-a550-070b7b907ab0,Xmla,5FB88F3F-E544-4FA0-A5D2-BBA448F35D12,0,0,,,55643653-6B43-4D3F-BBBE-50314ACF7E53
+2,"<Subscribe xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine"">
+          <Object>
+            <TraceID>DaxStudio_Session_89A63151-18B1-40A0-9B1D-A969B751D312_all</TraceID>
+          </Object>
+          <SubscriptionId xmlns=""http://schemas.microsoft.com/analysisservices/2018/engine/800"">TRACE_SUBSCRIPTION_a44b9c10-772a-43f5-be64-c3c16cfb2233</SubscriptionId>
+        </Subscribe>",2026-10-12T22:13:50.116667+05:30,0001-01-01T00:00:00,VISHNUPRIYA\chint,,Xmla,0FA81030-F21B-4CF6-B867-64D279F0AA75,0,0,,,0FA81030-F21B-4CF6-B867-64D279F0AA75
+1,"<Subscribe xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine"">
+          <Object>
+            <TraceID>DaxStudio_Session_BDEEC3B3-160F-4D22-80FE-3C64E6A604FE_all</TraceID>
+          </Object>
+          <SubscriptionId xmlns=""http://schemas.microsoft.com/analysisservices/2018/engine/800"">TRACE_SUBSCRIPTION_c0e7ebae-fec6-4516-bdbd-4239286f5345</SubscriptionId>
+        </Subscribe>",2026-10-12T22:07:00.133333+05:30,0001-01-01T00:00:00,VISHNUPRIYA\chint,AdventureWorks_Exercise5,Xmla,5596B3F5-3901-4DE1-AFC6-81EFF828F11D,0,0,,,5596B3F5-3901-4DE1-AFC6-81EFF828F11D
+1,"<Subscribe xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine"">
+          <Object>
+            <TraceID>DaxStudio_Session_BDEEC3B3-160F-4D22-80FE-3C64E6A604FE_all</TraceID>
+          </Object>
+          <SubscriptionId xmlns=""http://schemas.microsoft.com/analysisservices/2018/engine/800"">TRACE_SUBSCRIPTION_3079dc00-cf91-4686-a457-63dffd4e5b2e</SubscriptionId>
+        </Subscribe>",2026-10-12T22:06:55.766667+05:30,0001-01-01T00:00:00,VISHNUPRIYA\chint,AdventureWorks_Exercise5,Xmla,291B3380-E07E-4208-BE1D-840F6A370C16,0,0,,,291B3380-E07E-4208-BE1D-840F6A370C16
