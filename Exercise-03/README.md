@@ -60,3 +60,35 @@ Keep currency symbols, decimal places, and percentage formatting consistent.
 ## Outcome
 
 Exercise 3 extends the dimensional model with centralized measures and KPI/time-intelligence visuals. The visible measure list documents the work performed; final correctness depends on formula and filter-context testing.
+
+## Suggested workflow
+
+1. Open the Exercise 3 PBIX and confirm the required fact, customer, and calendar tables are available.
+2. Keep explicit measures organized in the dedicated _Measures table for easier discovery.
+3. Build and validate base measures first: Total Revenue, Total Cost, and Total Orders.
+4. Add Gross Margin and Gross Margin %; use DIVIDE for ratios to handle zero denominators.
+5. Add customer ranking and test it under different report filters.
+6. Add YTD, prior-year, YoY growth, rolling 12-month, and ship-date measures after verifying the date table and relationships.
+7. Format currency, percentage, and whole-number measures consistently.
+8. Test each measure with a table or card and at least one relevant slicer.
+
+## Measure validation notes
+
+- **Total Revenue / Total Cost:** compare with the corresponding fact-table aggregates.
+- **Gross Margin:** verify the measure subtracts cost from revenue under the same filter context.
+- **Gross Margin %:** confirm the numerator and denominator are intended and handle zero revenue.
+- **Customer Rank:** check tie behavior and whether ranking should respect current filters.
+- **Revenue YTD / Previous Year / YoY Growth:** test across year boundaries with the marked calendar table.
+- **Rolling 12M Sales:** verify the date range changes as the selected date changes; the project notes say the formula was switched to DimDate_Calendar[Date].
+- **Sales by Ship Date:** confirm the intended inactive ship-date relationship and USERELATIONSHIP behavior.
+
+## Troubleshooting
+
+- **Time-intelligence measures return blank:** check date-table marking, date relationships, and whether the selected period has prior-year data.
+- **Rolling total is unexpected:** inspect the date column used in DATESINPERIOD and the active relationship path.
+- **Ship-date result matches order-date result:** inspect the measure and relationship configuration.
+- **Percentage is incorrect:** check whether the measure is formatted as Percentage and whether DIVIDE uses the intended denominator.
+
+## Validation record
+
+The Fields pane previously showed 11 named measures, and the Rolling 12M Sales visual displayed a value during troubleshooting. Recheck each saved formula and its behavior under filters in the PBIX before treating all measure outputs as fully validated.
