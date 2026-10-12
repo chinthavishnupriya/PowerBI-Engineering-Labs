@@ -1,6 +1,6 @@
 # Power BI Engineering Labs
 
-A practical portfolio documenting four Power BI exercises: multi-source data preparation, AdventureWorks dimensional modeling, advanced DAX, and an interactive executive report.
+A practical portfolio documenting five Power BI exercises: multi-source data preparation, AdventureWorks dimensional modeling, advanced DAX, an interactive executive report, and a churn-risk capstone.
 
 ## Exercise index
 
@@ -10,7 +10,7 @@ A practical portfolio documenting four Power BI exercises: multi-source data pre
 | 2 | AdventureWorks dimensional modeling and relationships | [Exercise 2](./Exercise-02/) |
 | 3 | DAX measures and time intelligence | [Exercise 3](./Exercise-03/) |
 | 4 | Executive analytics, drill-through, and tooltips | [Exercise 4](./Exercise-04/) |
-| 5 | Capstone planning: deployment, refresh, ML, and RLS | [Exercise 5](./Exercise-05/) |
+| 5 | Churn-risk capstone: ML scoring, deployment, refresh, and RLS | [Exercise 5](./Exercise-05/) |
 
 ## Exercise 1 — Data preparation
 
