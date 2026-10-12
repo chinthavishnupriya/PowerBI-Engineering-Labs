@@ -54,3 +54,35 @@ Created a page named 12M Trend Tooltip and selected it in a visual's tooltip pag
 ## Outcome
 
 Exercise 4 combines earlier measures into a report with sales analysis, an executive summary, decomposition-tree analysis, a Customer 360 drill-through destination, and a trend tooltip page. Screenshots document the visible build; final interaction and layout validation should be performed in the saved PBIX.
+
+## Suggested build and review order
+
+1. Confirm the required DAX measures and date fields are available from earlier exercises.
+2. Build the Sales Analysis page first, with key KPIs, monthly trend, customer ranking, and customer-level detail.
+3. Arrange the Executive Overview page so summary KPIs appear before supporting trends and breakdowns.
+4. Configure the Decomposition Tree with Total Revenue in Analyze and appropriate explanatory fields available in the model.
+5. Add Customer 360 as a drill-through destination using DimCustomer[CustomerKey] and retain the relevant filters.
+6. Create the 12M Trend Tooltip page and configure the source visual to use it as a report-page tooltip.
+7. Apply the provided theme if desired, align visual edges, and use consistent titles and number formats.
+8. Test every page in Reading view and at a normal report size.
+
+## Interaction test checklist
+
+- Change the date slicer and verify that the expected visuals respond.
+- Select a bar or data point and check whether cross-filtering/highlighting is intentional.
+- Right-click a customer data point and test Drill through → Customer 360.
+- Confirm the destination shows the selected customer's context and that navigation back to the source page is available if required.
+- Hover over the intended source visual and confirm the 12M Trend Tooltip appears with relevant context.
+- Expand multiple branches in the Decomposition Tree and compare the values with the base Total Revenue measure.
+
+## Design review
+
+- Use consistent alignment, spacing, font hierarchy, and number formatting.
+- Avoid overcrowding the overview page; move detailed records to Customer 360.
+- Use meaningful visual titles and axis labels.
+- Ensure colors provide contrast and are consistent with the imported theme.
+- Check that labels remain readable without relying on hover-only information.
+
+## Validation record
+
+The repository documents the five pages and includes a report blueprint and theme JSON. The saved PBIX still needs a hands-on interaction check to confirm drill-through, tooltip configuration, slicer behavior, and totals work as intended.
